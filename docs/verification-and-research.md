@@ -39,7 +39,9 @@ Source:
 
 The project's `platformio.ini` selects the Espressif 8266 platform, Arduino framework and `nodemcuv2` board environment. The repository includes a GitHub Actions workflow that creates a local configuration file from the example template and runs `pio run`.
 
-A successful CI run would verify that the source compiles in that hosted build environment. It would not verify device upload, Wi-Fi credentials, Blynk account configuration, GPIO electrical behaviour, LED illumination or relay operation.
+**CI result: PASS.** The GitHub Actions run triggered by the latest repository update completed successfully. Its `platformio-build` job passed the configuration-copy step and the `pio run` firmware compilation step. This verifies that the source compiles in the hosted PlatformIO environment using the example configuration. It does not verify device upload, Wi-Fi credentials, Blynk account configuration, GPIO electrical behaviour, LED illumination or relay operation.
+
+Workflow: https://github.com/akashp9686-star/iot-light-control-mobile-app/actions/workflows/firmware-build.yml
 
 Source:
 - PlatformIO documentation: https://docs.platformio.org/
