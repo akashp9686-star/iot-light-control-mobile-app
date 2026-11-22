@@ -1,18 +1,17 @@
 # Components and Software
 
-## Hardware
+## Hardware — Glowlogics handbook inventory
 
-| Component | Quantity | Purpose |
+| Component | Quantity | Purpose / handbook description |
 |---|---:|---|
-| ESP8266 NodeMCU | 1 | Wi-Fi microcontroller running the firmware |
-| LED | 1 | Low-voltage output indicator |
-| 220 Ω resistor | 1 | Limits LED current |
-| Breadboard | 1 | Prototype assembly |
-| Jumper wires | 5 | Electrical connections |
-| Android/iOS phone | 1 | Runs Blynk IoT dashboard |
-| USB cable and suitable supply | 1 | Programming and board power |
+| ESP8266 NodeMCU | 1 | Wi-Fi microcontroller running Blynk firmware |
+| 5V relay module | 1 | Switches AC/DC loads safely; opto-isolated recommended |
+| LED + 220 Ω resistor | 1 | Safe demonstration without high voltage |
+| Breadboard | 1 | Prototyping platform |
+| Jumper wires | 5 | Connections |
+| Android/iOS phone | 1 | Runs Blynk IoT app |
 
-The Glowlogics handbook also lists one 5 V relay module as an option for switching a real load. It is not required for the LED-only demonstration.
+**Important distinction:** The handbook lists the relay module in the component inventory, while it provides separate wiring paths for the LED demonstration and relay-based real-appliance switching. The LED is the recommended low-voltage demonstration path in this repository. The repository does not assert that the relay has been assembled or tested.
 
 ## Software and services
 
@@ -22,6 +21,20 @@ The Glowlogics handbook also lists one 5 V relay module as an option for switchi
 - Blynk mobile application
 - Wi-Fi network with internet access
 
-## Notes
+## Pin mapping used by this firmware
 
-Check the exact NodeMCU board pin labels. D1 maps to ESP8266 GPIO5. The LED must be connected in series with the 220 Ω resistor; do not connect an LED directly across a GPIO and ground without current limiting.
+| Signal | Mapping |
+|---|---|
+| Blynk app datastream | Virtual Pin V0 |
+| ESP8266 physical output | NodeMCU D1 |
+| ESP8266 GPIO number | GPIO5 |
+
+The handbook's setup text mentions a Digital Pin D1 datastream, but its supplied firmware callback is `BLYNK_WRITE(V0)`; the app setup also says V0 (or D1). The implementation here follows the supplied callback: configure the Button on Virtual Pin V0, which controls physical D1 in firmware.
+
+## Electrical notes
+
+- D1 maps to ESP8266 GPIO5.
+- Connect the LED in series with the 220 Ω current-limiting resistor.
+- Verify the relay's coil voltage, trigger polarity, isolation and input compatibility from its exact datasheet before use.
+- Do not assume a relay module's VCC input or IN logic is identical across models.
+- Do not switch mains loads on an exposed breadboard. Any mains installation requires a qualified person and appropriate enclosure and protection.
