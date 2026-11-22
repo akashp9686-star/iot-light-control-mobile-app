@@ -104,7 +104,7 @@ Use the LED demonstration for initial evaluation. Do not connect household mains
 
 ## References
 
-See [docs/references.md](docs/references.md) and the supplied Glowlogics IoT Projects Handbook, Project 02.
+See [docs/references.md](docs/references.md), [docs/verification-and-research.md](docs/verification-and-research.md), and the supplied Glowlogics IoT Projects Handbook, Project 02. A GitHub Actions workflow at `.github/workflows/firmware-build.yml` is configured to compile the firmware using the example configuration; check the Actions tab for its actual result.
 
 ## License
 
