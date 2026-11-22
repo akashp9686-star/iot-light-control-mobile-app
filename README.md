@@ -111,3 +111,8 @@ See [docs/references.md](docs/references.md), [docs/verification-and-research.md
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+
+## Evaluator guide
+
+See [docs/evaluator-guide.md](docs/evaluator-guide.md) for a review path, reproducible build steps and the exact scope of available verification evidence.
