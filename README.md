@@ -1,48 +1,46 @@
 # IoT Light Control via Mobile App
 
-Control a low-voltage LED demonstration from the Blynk IoT mobile application using an ESP8266 NodeMCU. The firmware receives a Blynk Virtual Pin V0 command and switches the LED output connected to D1 (GPIO5).
+Control a low-voltage LED demonstration from the Blynk IoT mobile application using an ESP8266 NodeMCU. The firmware receives a Blynk Virtual Pin V0 command and switches the output on NodeMCU D1 (GPIO5).
 
-> **Project status:** This repository contains a documented implementation and firmware template. The repository owner must configure Blynk and Wi-Fi credentials, build and upload the firmware, and verify the physical circuit before claiming a successful end-to-end test. No physical test evidence has been supplied yet.
+> **Project status:** This repository contains a documented firmware implementation and setup guide. The owner must configure Blynk and Wi-Fi credentials, build and upload the firmware, and verify the physical circuit before claiming successful operation. No physical test evidence has been supplied yet.
 
-## Project objective
+## Objective
 
-Demonstrate remote IoT control of a physical output over the internet using an ESP8266 NodeMCU and Blynk IoT. The handbook permits an LED for a safe demonstration and describes a relay as an option for switching a real load.
+Control a physical load wirelessly from the Blynk mobile app. The Glowlogics handbook describes an LED as the safe demonstration load and a relay for real appliances.
 
-## Features
+## Handbook component inventory
 
-- ESP8266 NodeMCU Wi-Fi connectivity
-- Blynk IoT mobile dashboard control
-- Blynk Virtual Pin V0 switch command
-- Output on NodeMCU D1 (GPIO5)
-- LED demonstration with a 220 Ω series resistor
-- Serial status messages
-- Credentials kept in a local, ignored configuration header
+| Component | Handbook quantity | Role |
+|---|---:|---|
+| ESP8266 NodeMCU | 1 | Wi-Fi microcontroller |
+| 5V relay module | 1 | Switching AC/DC loads; opto-isolated recommended |
+| LED + 220 Ω resistor | 1 | Safe low-voltage demonstration |
+| Breadboard | 1 | Prototyping |
+| Jumper wires | 5 | Connections |
+| Android/iOS phone | 1 | Blynk IoT app |
 
-## Hardware
+The relay is part of the handbook's listed component inventory. The LED wiring is the low-voltage demo path; relay wiring is the handbook's alternative for a real appliance. This repository does not claim that a relay has been physically connected or tested.
 
-- ESP8266 NodeMCU development board
-- LED
-- 220 Ω resistor
-- Breadboard and jumper wires
-- Android or iOS phone with Blynk IoT app
-- USB cable and suitable power source
+## Implemented control mapping
 
-A 5 V relay module is listed in the handbook as an alternative for real-load switching. This repository's default firmware and wiring guide are for the low-voltage LED demonstration, not mains appliances.
+- Blynk mobile Button: Virtual Pin **V0**, switch mode, integer 0/1.
+- Firmware callback: `BLYNK_WRITE(V0)`.
+- Physical output: NodeMCU **D1 (GPIO5)**.
 
-## Wiring — LED demonstration
+The handbook's setup text mentions a Digital Pin D1 datastream, while its sample firmware uses `BLYNK_WRITE(V0)` and its app instructions say V0 (or D1). The source code in the handbook supports the V0 callback method. This repository therefore uses V0 for the app datastream and D1 as the physical ESP8266 output. These are different pin namespaces and must not be confused.
+
+## LED demonstration wiring
 
 | LED connection | NodeMCU |
 |---|---|
-| LED anode (+) through 220 Ω resistor | D1 (GPIO5) |
-| LED cathode (−) | GND |
+| Anode (+) through 220 Ω series resistor | D1 (GPIO5) |
+| Cathode (−) | GND |
 
 See [docs/wiring.md](docs/wiring.md).
 
-## Blynk control mapping
+## Relay alternative
 
-This implementation uses a **Virtual Pin V0** datastream for the mobile Button widget. The firmware callback `BLYNK_WRITE(V0)` receives the button state and writes it to physical output D1.
-
-The handbook's setup text mentions a Digital Pin D1 datastream, while its sample firmware uses `BLYNK_WRITE(V0)` and the app instructions say V0 (or D1). To avoid mixing two different Blynk approaches, this repository consistently implements Virtual Pin V0.
+The handbook lists a 5V relay module and gives D1 as its input, GND as common ground, and 3V3 or Vin (5V) as its supply depending on the module. Relay modules vary; verify the exact module's coil voltage, trigger polarity, isolation and ESP8266 input compatibility before connecting it. Do not connect mains wiring as part of an unsupervised prototype.
 
 ## Repository structure
 
@@ -73,20 +71,13 @@ The handbook's setup text mentions a Digital Pin D1 datastream, while its sample
 └── LICENSE
 ```
 
-## Software requirements
-
-- PlatformIO (VS Code extension or PlatformIO Core)
-- ESP8266 NodeMCU board support
-- Blynk library compatible with the current Blynk IoT platform
-- Blynk account and a configured template/device
-
 ## Configure
 
 1. Copy `config/config.example.h` to `config/config.h`.
-2. Fill in the Blynk Template ID, Template Name, Auth Token, Wi-Fi SSID and Wi-Fi password.
-3. Keep the Blynk button datastream as Virtual Pin V0.
-4. Confirm the LED is wired to D1 through a 220 Ω resistor.
-5. Do not commit `config/config.h` or share your Auth Token.
+2. Fill in Blynk Template ID, Template Name, Auth Token, Wi-Fi SSID and password.
+3. Configure the Blynk Button as a Switch on Virtual Pin V0.
+4. Connect the LED through a 220 Ω resistor to D1 and GND.
+5. Keep `config/config.h` private; it is ignored by Git.
 
 ## Build and upload
 
@@ -96,19 +87,19 @@ pio run --target upload
 pio device monitor
 ```
 
-Select the correct serial port and upload settings for your NodeMCU. The firmware uses 115200 baud for serial output.
+Select the correct serial port. Serial output uses 115200 baud.
 
-## Testing status
+## Verification status
 
-The code and documentation are prepared, but physical verification has not yet been recorded. Follow [docs/testing.md](docs/testing.md) and [tests/manual-test-plan.md](tests/manual-test-plan.md). Do not mark tests complete until they have actually been performed.
+Firmware and documentation are prepared, but physical operation has not been independently verified. Follow [docs/testing.md](docs/testing.md) and add genuine circuit photographs, dashboard screenshots and build records after testing.
 
 ## Safety
 
-Use the LED demonstration for evaluation and initial testing. Do not connect household mains wiring to a breadboard or exposed relay contacts. Any mains appliance installation must be designed and installed by a qualified person using an appropriately rated, isolated enclosure and protective measures.
+Use the LED demonstration for initial evaluation. Do not connect household mains wiring to a breadboard or exposed relay contacts. Any mains appliance installation must be designed and installed by a qualified person using an appropriately rated isolated enclosure and protective measures.
 
 ## References
 
-See [docs/references.md](docs/references.md) and the [Glowlogics IoT Projects Handbook](https://www.glowlogics.com/) for the assigned project outline.
+See [docs/references.md](docs/references.md) and the supplied Glowlogics IoT Projects Handbook, Project 02.
 
 ## License
 
