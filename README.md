@@ -47,6 +47,8 @@ The handbook lists a 5V relay module and gives D1 as its input, GND as common gr
 ```text
 .
 ├── README.md
+├── LICENSE
+├── .gitignore
 ├── platformio.ini
 ├── config/
 │   └── config.example.h
@@ -57,18 +59,21 @@ The handbook lists a 5V relay module and gives D1 as its input, GND as common gr
 │   ├── objectives.md
 │   ├── components.md
 │   ├── architecture.md
+│   ├── circuit-diagram.md
 │   ├── wiring.md
 │   ├── blynk-setup.md
 │   ├── methodology.md
 │   ├── testing.md
+│   ├── results.md
 │   ├── limitations.md
-│   └── references.md
+│   ├── references.md
+│   └── review-checklist.md
 ├── tests/
 │   └── manual-test-plan.md
-├── images/
-│   └── README.md
-├── .gitignore
-└── LICENSE
+└── images/
+    ├── circuit/
+    ├── application/
+    └── results/
 ```
 
 ## Configure
@@ -91,7 +96,7 @@ Select the correct serial port. Serial output uses 115200 baud.
 
 ## Verification status
 
-Firmware and documentation are prepared, but physical operation has not been independently verified. Follow [docs/testing.md](docs/testing.md) and add genuine circuit photographs, dashboard screenshots and build records after testing.
+Firmware and documentation are prepared, but physical operation has not been independently verified. Follow [docs/testing.md](docs/testing.md), record actual observations in [docs/results.md](docs/results.md), and complete [docs/review-checklist.md](docs/review-checklist.md). Add genuine circuit photographs and dashboard screenshots in the relevant `images/` folders after testing.
 
 ## Safety
 
