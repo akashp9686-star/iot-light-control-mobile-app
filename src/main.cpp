@@ -33,10 +33,9 @@ BLYNK_WRITE(V0) {
 }
 
 BLYNK_CONNECTED() {
-  // Start in a known safe state after a cloud reconnect.
-  digitalWrite(OUTPUT_PIN, LOW);
-  Blynk.virtualWrite(V0, 0);
-  Serial.println(F("Connected to Blynk"));
+  // Restore the latest switch value from the Blynk server after reconnect.
+  Blynk.syncVirtual(V0);
+  Serial.println(F("Connected to Blynk; syncing V0"));
 }
 
 void setup() {
