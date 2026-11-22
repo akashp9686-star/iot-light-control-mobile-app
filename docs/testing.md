@@ -2,11 +2,11 @@
 
 ## Current status
 
-Firmware and documentation are prepared. No physical build or end-to-end test evidence has been supplied for this repository. All hardware and cloud tests below remain **not yet verified**.
+Firmware compilation has passed in GitHub Actions using the example configuration. No physical build or end-to-end test evidence has been supplied for this repository. All hardware and cloud tests below remain **not yet verified**.
 
 | Test | Expected result | Status |
 |---|---|---|
-| PlatformIO build | Firmware compiles successfully | Not yet verified |
+| Automated PlatformIO build | Firmware compiles successfully in GitHub Actions | Passed — [workflow run](https://github.com/akashp9686-star/iot-light-control-mobile-app/actions/runs/44998543471) |
 | Firmware upload | NodeMCU accepts firmware | Not yet verified |
 | Wi-Fi connection | Device joins configured network | Not yet verified |
 | Blynk authentication | Device appears online | Not yet verified |
