@@ -1,5 +1,7 @@
 # IoT Light Control via Mobile App
 
+[![Firmware build](https://github.com/akashp9686-star/iot-light-control-mobile-app/actions/workflows/firmware-build.yml/badge.svg)](https://github.com/akashp9686-star/iot-light-control-mobile-app/actions/workflows/firmware-build.yml)
+
 Control a low-voltage LED demonstration from the Blynk IoT mobile application using an ESP8266 NodeMCU. The firmware receives a Blynk Virtual Pin V0 command and switches the output on NodeMCU D1 (GPIO5).
 
 > **Project status:** This repository contains a documented firmware implementation and setup guide. The owner must configure Blynk and Wi-Fi credentials, build and upload the firmware, and verify the physical circuit before claiming successful operation. No physical test evidence has been supplied yet.
