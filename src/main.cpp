@@ -1,8 +1,8 @@
+#include "config.h"
+
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
-
-#include "config.h"
 
 #ifndef BLYNK_TEMPLATE_ID
 #error "Define BLYNK_TEMPLATE_ID in config/config.h"
